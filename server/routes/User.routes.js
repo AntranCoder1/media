@@ -11,4 +11,17 @@ router.get("/", async (req, res) => {
     res.status(200).json(users);
 });
 
+// @routes api/users/:id
+// @route GET user
+// access Private
+router.get("/:id", async (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+    User.findById(req.params.id, (err, docs) => {
+        if (!err) res.send(docs);
+        else console.log("ID unknown : " + err);
+    }).select("-password");
+});
+
 module.exports = router;

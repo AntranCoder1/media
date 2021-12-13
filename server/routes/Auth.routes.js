@@ -51,7 +51,8 @@ router.post("/login", async (req, res) => {
 
         const token = createToken(user._id);
         res.cookie('jwt', token, { httpOnly: true, maxAge});
-        res.status(200).json({ user: user._id })
+        const { password, _id, email, createdAt, updatedAt, __v, ...orthers  } = user._doc;
+        res.status(200).json({ ...orthers, token })
     } catch (error) {
         const errors = signInErrors(error);
         res.status(200).json({ errors });

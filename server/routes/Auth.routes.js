@@ -58,4 +58,12 @@ router.post("/login", async (req, res) => {
     }
 });
 
+// @route api/auth/logout
+// @route GET auth
+// @access private
+router.get("/logout", (req, res) => {
+    res.cookie('jwt', '', { maxAge: 1 });
+    res.redirect('/');
+});
+
 module.exports = router;

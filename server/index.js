@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
+const morgan = require('morgan');
 
 const connectDB = async () => {
     try {
@@ -23,6 +25,10 @@ const connectDB = async () => {
 
 connectDB();
 
+// middleware
+app.use(cors());
+app.use(express.json());
+app.use(morgan("common"));
 
 const port = 5000
 app.listen(port, () => {

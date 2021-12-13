@@ -2,7 +2,16 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/user.models');
-const { signUpErrors } = require('../utils/errors.utils');
+const { signUpErrors, signInErrors } = require('../utils/errors.utils');
+const jwt = require('jsonwebtoken');
+
+const maxAge = 3 * 24 * 60 * 60 * 1000;
+
+const createToken = (id) => {
+    return jwt.sign({id}, process.env.TOKEN_SECRET, {
+        expiresIn: maxAge
+    })
+};
 
 // @route api/auth/register
 // @route POST auth
@@ -27,6 +36,26 @@ router.post("/register", async (req, res) => {
         const errors = signUpErrors(error);
         res.status(200).json({ errors });
     }
-}); 
+});
+
+// @router api/auth/login
+// @router POST auth
+// @access public
+router.post("/login", async (req, res) => {
+    try {
+        const user = await User.findOne({ email: req.body.email });
+        !user && res.status(404).json("user not found");
+
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        !validPassword && res.status(400).json("Wrong password");
+
+        const token = createToken(user._id);
+        res.cookie('jwt', token, { httpOnly: true, maxAge});
+        res.status(200).json({ user: user._id })
+    } catch (error) {
+        const errors = signInErrors(error);
+        res.status(200).json({ errors });
+    }
+});
 
 module.exports = router;

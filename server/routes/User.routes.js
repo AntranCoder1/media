@@ -48,4 +48,19 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+// @route api/users/:id
+// @route DELETE user
+// @access Private
+router.delete("/:id", async (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown: " + req.params.id);
+
+    try {
+        await User.remove({ _id: req.params.id }).exec();
+        res.status(200).json({ success: true, message: "Successfully deleted." });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+});
+
 module.exports = router;

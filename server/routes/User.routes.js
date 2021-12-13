@@ -11,17 +11,41 @@ router.get("/", async (req, res) => {
     res.status(200).json(users);
 });
 
-// @routes api/users/:id
+// @route api/users/:id
 // @route GET user
 // access Private
 router.get("/:id", async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
+        return res.status(400).send("ID unknown : " + req.params.id);
 
     User.findById(req.params.id, (err, docs) => {
         if (!err) res.send(docs);
         else console.log("ID unknown : " + err);
     }).select("-password");
+});
+
+// @route api/users/:id
+// @route PUT user
+// @access Private
+router.put("/:id", async (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown: " + req.params.id);
+
+    try {
+        await User.findOneAndUpdate(
+            { _id: req.params.id },
+            {
+                $set: req.body,
+            },
+            { new: true, upsert: true, setDefaultsOnInsert: true },
+            (err, docs) => {
+                if (!err) return res.send(docs);
+                if (err) return res.status(500).send({ message: err });
+            }
+        );
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
 });
 
 module.exports = router;

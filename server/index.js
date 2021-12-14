@@ -10,6 +10,7 @@ const { checkUser, requireAuth }  = require('./middleware/Auth.middleware');
 
 const authRoutes = require('./routes/Auth.routes');
 const userRoutes = require('./routes/User.routes');
+const postRoutes = require('./routes/Post.routes');
 
 const connectDB = async () => {
     try {
@@ -45,6 +46,7 @@ app.get('/jwtid', requireAuth, (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 
 const port = 5000
 app.listen(port, () => {

@@ -58,4 +58,17 @@ router.put("/:id", async (req, res) => {
     );
 });
 
+// @routes api/posts/:id
+// @routes DELETE post
+// @access private
+router.delete("/:id", async (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown: " + req.params.id);
+
+    Post.findByIdAndRemove(req.params.id, (err, docs) => {
+        if (!err) res.status(200).json(docs);
+        else console.log("Delete error : " + err);
+    });
+});
+
 module.exports = router;

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/post.models');
+const User = require('../models/user.models');
 const ObjectID = require("mongoose").Types.ObjectId;
 const fs = require('fs');
 const { promisify } = require('util');
@@ -69,6 +70,37 @@ router.delete("/:id", async (req, res) => {
         if (!err) res.status(200).json(docs);
         else console.log("Delete error : " + err);
     });
+});
+
+// @routes api/posts/like-post/:id
+// @routes PATCH post
+// @access private
+router.patch("/like-post/:id", async (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown: " + req.params.id);
+
+    try {
+        await Post.findByIdAndUpdate(
+            req.params.id,
+            { $addToSet: { likers: req.body.id } },
+            { new: true },
+            (err, docs) => {
+                if (err) return res.status(400).send(err);
+            }
+        );
+
+        await User.findByIdAndUpdate(
+            req.body.id,
+            { $addToSet: { likes: req.params.id } },
+            { new: true },
+            (err, docs) => {
+                if (!err) res.status(200).json(docs);
+                else return res.status(400).send(err);
+            }
+        );
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
 });
 
 module.exports = router;

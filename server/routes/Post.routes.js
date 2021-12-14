@@ -7,6 +7,16 @@ const { promisify } = require('util');
 const pipeline = promisify(require("stream").pipeline);
 
 // @routes api/posts/
+// @routes GET posts
+// @access Private
+router.get("/", async (req, res) => {
+    Post.find((err, docs) => {
+        if (!err) res.send(docs);
+        else console.log("Error to get data: " + err);
+    }).sort({ createdAt: -1 });
+});
+
+// @routes api/posts/
 // @routes POST post
 // @access Private
 router.post("/", async (req, res) => {

@@ -97,4 +97,36 @@ router.patch("/follow/:id", async (req, res) => {
     }
 });
 
+// @route api/users/unfollow/:id
+// @route PATH user
+// @access private
+router.patch("/unfollow/:id", async (req, res) => {
+    if (!ObjectID.isValid(req.params.id) || !ObjectID.isValid(req.body.idToUnfollow))
+        return res.status(400).send("ID unknown: " + req.params.id);
+    
+    try {
+        await User.findByIdAndUpdate(
+            req.params.id,
+            { $pull: { following: req.body.idToUnfollow } },
+            { new: true, upsert: true },
+            (err, docs) => {
+                if (!err) res.status(201).json(docs);
+                else return res.status(400).jsos(err);
+            }
+        );
+        // remove to following list
+        await User.findByIdAndUpdate(
+            req.body.idToUnfollow,
+            { $pull: { followers: req.params.id } },
+            { new: true, upsert: true },
+            (err, docs) => {
+                // if (!err) res.status(201).json(docs);
+                if (err) return res.status(400).jsos(err);
+            }
+        );
+    } catch (err) {
+        return res.status(500).json({ message: err });
+    }
+});
+
 module.exports = router;

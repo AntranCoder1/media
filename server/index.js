@@ -4,6 +4,9 @@ const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+
+const { checkUser, requireAuth }  = require('./middleware/Auth.middleware');
 
 const authRoutes = require('./routes/Auth.routes');
 const userRoutes = require('./routes/User.routes');
@@ -32,6 +35,13 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("common"));
+app.use(cookieParser());
+
+// jwt
+app.get('*', checkUser);
+app.get('/jwtid', requireAuth, (req, res) => {
+    res.status(200).send(res.locals.user._id);
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);

@@ -103,4 +103,34 @@ router.patch("/like-post/:id", async (req, res) => {
     }
 });
 
+// @routes api/posts/unlike-post/:id
+// @routes PATCH post
+// @access private
+router.patch("/unlike-post/:id", async (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown: " + req.params.id);
+
+    try {
+        await Post.findByIdAndUpdate(
+            req.params.id,
+            { $pull: { likers: req.body.id } },
+            { new: true },
+            (err, docs) => {
+                if (err) return res.status(400).json(err);
+            }
+        );
+        await User.findByIdAndUpdate(
+            req.body.id,
+            { $pull: { likes: req.params.id } },
+            { new: true },
+            (err, docs) => {
+                if (!err) res.status(200).json(docs);
+                else return res.status(400).json(err);
+            }
+        );
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+});
+
 module.exports = router;

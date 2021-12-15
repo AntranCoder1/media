@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const postController = require('../controllers/Post.controllers');
-const uploadController = require('../controllers/Upload.controllers');
 const multer = require('multer');
 const upload = multer();
 
@@ -49,7 +48,5 @@ router.patch("/edit-comment-post/:id", postController.updateComment);
 // @routes PATCH delete post comment
 // @access private
 router.patch("/delete-comment-post/:id", postController.deleteComment);
-
-router.post("/upload", upload.single("file"), uploadController.uploadProfil);
 
 module.exports = router;

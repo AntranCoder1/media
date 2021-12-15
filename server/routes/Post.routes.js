@@ -133,4 +133,35 @@ router.patch("/unlike-post/:id", async (req, res) => {
     }
 });
 
+// @route api/posts/comment-post/:id
+// @route PATCH post
+// @access private
+router.patch("/comment-post/:id", async (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown: " + req.params.id);
+
+    try {
+        await Post.findByIdAndUpdate(
+            req.params.id,
+            {
+                $push: {
+                    comments: {
+                        commenterId: req.body.commenterId,
+                        commenterUsername: req.body.commenterUsername,
+                        text: req.body.text,
+                        timestamp: new Date().getTime(),
+                    },
+                },
+            },
+            { new: true },
+            (err, docs) => {
+                if (!err) return res.send(docs);
+                else return res.status(400).send(err);
+            }
+        );
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+});
+
 module.exports = router;

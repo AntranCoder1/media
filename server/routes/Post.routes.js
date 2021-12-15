@@ -134,7 +134,7 @@ router.patch("/unlike-post/:id", async (req, res) => {
 });
 
 // @route api/posts/comment-post/:id
-// @route PATCH post
+// @route PATCH create post comment
 // @access private
 router.patch("/comment-post/:id", async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
@@ -165,7 +165,7 @@ router.patch("/comment-post/:id", async (req, res) => {
 });
 
 // @routes api/posts/edit-comment-post/:id
-// @routes PATCH posts
+// @routes PATCH update posts comment
 // @access private
 router.patch("/edit-comment-post/:id", (req, res) => {
     if (!ObjectID.isValid(req.params.id))
@@ -187,6 +187,32 @@ router.patch("/edit-comment-post/:id", (req, res) => {
         });
     } catch (err) {
         return res.status(400).send(err);
+    }
+});
+
+// @routes api/posts/delete-comment-post/:id
+// @routes PATCH delete post comment
+// @access private
+router.patch("/delete-comment-post/:id", (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown: " + req.params.id);
+
+    try {
+        return Post.findByIdAndUpdate(
+            req.params.id,
+            { $pull: {
+                comments: {
+                    _id: req.body.commentId,
+                }
+            } },
+            { new: true },
+            (err, docs) => {
+                if (!err) return res.status(200).json(docs);
+                else return res.status(400).json(err);
+            }
+        );
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal server error" });
     }
 });
 

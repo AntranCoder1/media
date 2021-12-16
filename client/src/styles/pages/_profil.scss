@@ -1,21 +1,21 @@
 .profil-page {
     margin: 80px auto 0;
     max-width: 1200px;
-
+  
     .icons {
         top: 55px;
     }
-
+  
     .log-container {
         margin: 0 auto;
         display: grid;
         grid-template-columns: 60% 40%;
-
+    
         @media screen and(max-width: 885px) {
             grid-template-columns: 1fr;
         }
     }
-
+  
     .connection-form {
         border: none;
         background: $color-4;
@@ -25,26 +25,26 @@
         margin: 0 auto;
         padding: 20px;
         border-radius: 20px;
-
+    
         @media screen and(max-width: 550px) {
             min-width: 200px;
         }
-
+  
         .form-container {
             display: grid;
             grid-template-columns: 30% 70%;
-
+    
             @media screen and(max-width: 550px) {
                 grid-template-columns: 1fr;
             }
-
+    
             ul {
                 li {
                     cursor: pointer;
                     border-radius: 20px;
                     padding: 10px 20px;
                     transition: 0.2s;
-
+        
                     @media screen and(max-width: 550px) {
                         width: 80%;
                         margin: 0 auto;
@@ -53,7 +53,7 @@
 
                 .active-btn {
                     background: $color-1;
-          
+        
                     &:hover {
                         background: $color-2;
                     }
@@ -70,7 +70,7 @@
 
                     @media screen and(max-width: 550px) {
                         margin-bottom: 30px;
-                        
+        
                         &:after {
                             content: "";
                             position: absolute;
@@ -92,12 +92,11 @@
                     font-size: 1.2rem;
                     font-family: $font-2;
                     border-radius: 20px;
-
+        
                     &:focus {
                         box-shadow: 0 0 3px rgba(51, 51, 51, 0.2);
                     }
                 }
-
                 a {
                     color: rgb(62, 62, 214);
                 }
@@ -114,18 +113,16 @@
         display: grid;
         align-items: center;
         height: 100%;
-
+    
         img {
             height: 280px;
-
+    
             @media screen and(max-width: 1050px) {
                 height: 220px;
             }
-
             @media screen and(max-width: 950px) {
-                height: 220px;
+                height: 200px;
             }
-
             @media screen and(max-width: 885px) {
                 display: none;
             }
@@ -135,17 +132,17 @@
     .update-container {
         display: grid;
         grid-template-columns: 50% 50%;
-
+  
         @media screen and(max-width: 700px) {
             grid-template-columns: 1fr;
         }
-
+  
         > div {
             background: $color-4;
             border-radius: 20px;
             padding: 25px;
             margin: 20px 10px;
-
+    
             @media screen and(max-width: 700px) {
                 margin: 10px 10px;
             }
@@ -153,11 +150,11 @@
 
         .left-part {
             text-align: center;
-
+  
             h3 {
                 margin-bottom: 12px;
             }
-
+  
             img {
                 height: 180px;
                 width: 180px;
@@ -169,7 +166,7 @@
 
             form {
                 position: relative;
-
+    
                 label {
                     position: absolute;
                     transform: translate(-50%, -50%);
@@ -190,7 +187,7 @@
                     transform: translate(-3px, -50%);
                     cursor: pointer;
                     padding: 10px 20px;
-
+        
                     @media screen and(max-width: 1121px) {
                         opacity: 0;
                     }
@@ -199,13 +196,12 @@
                 input[type="submit"] {
                     margin-top: 10px;
                     border-radius: 20px;
-
+        
                     &:hover {
                         letter-spacing: 1px;
                     }
                 }
             }
-
             p {
                 color: red;
                 font-family: $font-3;
@@ -272,13 +268,13 @@
         height: 100%;
         position: fixed;
         animation: popup 1s forwards;
-
+    
         @keyframes popup {
             to {
                 backdrop-filter: blur(2px);
             }
         }
-
+  
         .modal {
             position: absolute;
             top: 10%;
@@ -292,17 +288,17 @@
             transform: scaleY(0);
             transform-origin: center;
             animation: modal .5s forwards;
-
+    
             h3 {
                 min-width: 200px;
             }
-
+    
             @keyframes modal {
                 to {
                     transform: scale(1) translate(-50%);
                 }
             }
-
+    
             .cross {
                 position: absolute;
                 top: 25px;
@@ -314,13 +310,13 @@
                     transform: scale(1.07);
                 }
             }
-
+    
             ul {
                 margin: 20px 0 0;
                 max-height: 500px;
                 overflow-y: scroll;
                 overflow-x: hidden;
-
+    
                 &::-webkit-scrollbar {
                     width: 2px;
                 }
@@ -336,13 +332,13 @@
                 &::-webkit-scrollbar-thumb:hover {
                     background: #555;
                 }
-
+    
                 li {
                     display: grid;
                     grid-template-columns: 64px 1fr 114px;
                     align-items: center;
                     margin: 10px 0;
-
+        
                     img {
                         height: 50px;
                         width: 50px;
@@ -355,15 +351,15 @@
                         text-align: left;
                         min-width: 210px;
                     }
-
+                    
                     .follow-handler {
                         text-align: left;
-
+        
                         button {
                             background: $color-4;
                             border-radius: 20px;
                             margin-right: 6px;
-
+            
                             &:hover {
                                 color: $color-3;
                                 transform: translateX(2px);
@@ -375,3 +371,4 @@
         }
     }
 }
+  

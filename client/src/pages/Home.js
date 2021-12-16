@@ -1,6 +1,7 @@
 import React from 'react';
 import Log from '../components/log/Index';
 import Leftnav from '../components/Leftnav';
+import Trends from '../components/Trends';
 
 const Home = () => {
     return (
@@ -14,7 +15,7 @@ const Home = () => {
             <div className="right-side">
                 <div className="right-side-container">
                 <div className="wrapper">
-                    
+                    <Trends />
                 </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@ const Login = () => {
         const passwordError = document.querySelector(".password.error");
 
         axios({
-            method: "POST",
+            method: "post",
             url: "/auth/login",
             withCredentials: true,
             data: {

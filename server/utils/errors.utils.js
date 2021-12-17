@@ -28,7 +28,7 @@ module.exports.signInErrors = (err) => {
     if (err.message.includes("password"))
         errors.password = "Password does not match";
 
-    return errors;
+    return errors
 };
 
 module.exports.uploadErrors = (err) => {

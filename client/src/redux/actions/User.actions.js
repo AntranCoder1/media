@@ -18,3 +18,23 @@ export const getUser = (uid) => {
             .catch((err) => console.log(err));
     };
 };
+
+export const uploadPicture = (data, id) => {
+    return (dispatch) => {
+        return axios
+            .post("/users/upload", data)
+            .then((res) => {
+                if (res.data.errors) {
+                    dispatch({ type: GET_USER_ERRORS, payload: res.data.errors });
+                } else {
+                    dispatch({ type: GET_USER_ERRORS, payload: "" });
+                return axios
+                    .get(`/users/${id}`)
+                    .then((res) => {
+                        dispatch({ type: UPLOAD_PICTURE, payload: res.data.picture });
+                    });
+                }
+            })
+            .catch((err) => console.log(err));
+      };
+};

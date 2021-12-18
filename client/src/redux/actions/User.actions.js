@@ -38,3 +38,17 @@ export const uploadPicture = (data, id) => {
             .catch((err) => console.log(err));
       };
 };
+
+export const updateBio = (userId, bio) => {
+    return (dispatch) => {
+        return axios({
+            method: "put",
+            url: "/users/" + userId,
+            data: { bio },
+        })
+            .then((res) => {
+                dispatch({ type: UPDATE_BIO, payload: bio });
+            })
+            .catch((err) => console.log(err));
+    }
+};

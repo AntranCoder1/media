@@ -1,6 +1,4 @@
-import {
-    GET_USERS
-} from './actions/Users.action';
+import { GET_USERS } from './actions/Users.action';
 
 const initialState = {};
 
@@ -14,4 +12,3 @@ const UsersRedux = (state = initialState, action) => {
 }
 
 export default UsersRedux
-

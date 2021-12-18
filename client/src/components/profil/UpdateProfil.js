@@ -56,8 +56,12 @@ const UpdateProfil = () => {
                         ) }
                     </div>
                     <h4>Member since : {dateParser(userData.createdAt)}</h4>
-                    <h5>Subscriptions: {userData.following ? userData.following.length : ""}</h5>
-                    <h5>Subscribers: {userData.followers ? userData.followers.length : ""}</h5>
+                    <h5 onClick={() => setFollowingPopup(true)}>
+                        Subscriptions: {userData.following ? userData.following.length : ""}
+                    </h5>
+                    <h5 onClick={() => setFollowersPopup(true)}>
+                        Subscribers: {userData.followers ? userData.followers.length : ""}
+                    </h5>
                 </div>
             </div>
             { followingPopup && (
@@ -66,18 +70,18 @@ const UpdateProfil = () => {
                         <h3>Subscriptions</h3>
                         <span 
                             className="cross"
-                            onClick={() => setFollowingPopup(!followingPopup)}
+                            onClick={() => setFollowingPopup(false)}
                         >
                             &#10005;
                         </span>
                         <ul>
-                            {/* { userData.map((user) => {
+                            { usersData.map((user) => {
                                 for (let i = 0; i < userData.following.length; i++ ) {
                                     if (user._id === userData.following[i]) {
                                         return (
                                             <li key={user._id}>
                                                 <img src={user.picture} alt="user-pic" />
-                                                <h4>Trần Thành An</h4>
+                                                <h4>{user.username}</h4>
                                                 <div className="follow-handler">
                                                     <FollowHandle />
                                                 </div>
@@ -85,7 +89,7 @@ const UpdateProfil = () => {
                                         )
                                     }
                                 }
-                            }) } */}
+                            }) }
                         </ul>
                     </div>
                 </div>

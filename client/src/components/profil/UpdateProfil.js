@@ -9,16 +9,19 @@ import { updateBio } from '../../redux/actions/User.actions';
 const UpdateProfil = () => {
 
     const userData = useSelector(state => state.UserRedux);
+    const usersData = useSelector(state => state.UsersRedux);
     const [bio, setBio] = useState("");
     const [updateForm, setUpdateForm] = useState(false);
     const dispatch = useDispatch();
-    const [followingPopup, setFollowingPopup] = useState(false);
+    const [followingPopup, setFollowingPopup] = useState(true);
     const [followersPopup, setFollowersPopup] = useState(false);
 
     const handleUpdate = () => {
         dispatch(updateBio(userData._id, bio));
         setUpdateForm(false);
     }
+
+    console.log(usersData)
 
     return (
         <div className="profil-container">
@@ -57,6 +60,36 @@ const UpdateProfil = () => {
                     <h5>Subscribers: {userData.followers ? userData.followers.length : ""}</h5>
                 </div>
             </div>
+            { followingPopup && (
+                <div className="popup-profil-container">
+                    <div className="modal">
+                        <h3>Subscriptions</h3>
+                        <span 
+                            className="cross"
+                            onClick={() => setFollowingPopup(!followingPopup)}
+                        >
+                            &#10005;
+                        </span>
+                        <ul>
+                            {/* { userData.map((user) => {
+                                for (let i = 0; i < userData.following.length; i++ ) {
+                                    if (user._id === userData.following[i]) {
+                                        return (
+                                            <li key={user._id}>
+                                                <img src={user.picture} alt="user-pic" />
+                                                <h4>Trần Thành An</h4>
+                                                <div className="follow-handler">
+                                                    <FollowHandle />
+                                                </div>
+                                            </li>
+                                        )
+                                    }
+                                }
+                            }) } */}
+                        </ul>
+                    </div>
+                </div>
+            ) }
             {/* <div className="popup-profil-container">
                 <div className="modal">
                     <h3>Subscriptions</h3>

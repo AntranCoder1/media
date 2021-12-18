@@ -13,15 +13,13 @@ const UpdateProfil = () => {
     const [bio, setBio] = useState("");
     const [updateForm, setUpdateForm] = useState(false);
     const dispatch = useDispatch();
-    const [followingPopup, setFollowingPopup] = useState(true);
+    const [followingPopup, setFollowingPopup] = useState(false);
     const [followersPopup, setFollowersPopup] = useState(false);
 
     const handleUpdate = () => {
         dispatch(updateBio(userData._id, bio));
         setUpdateForm(false);
     }
-
-    console.log(usersData)
 
     return (
         <div className="profil-container">
@@ -86,54 +84,46 @@ const UpdateProfil = () => {
                                                     <FollowHandle />
                                                 </div>
                                             </li>
-                                        )
+                                        );
                                     }
                                 }
+                                return null;
                             }) }
                         </ul>
                     </div>
                 </div>
             ) }
-            {/* <div className="popup-profil-container">
-                <div className="modal">
-                    <h3>Subscriptions</h3>
-                    <span 
-                        className="cross"
-                        onClick={() => setFollowingPopup(true)}
-                    >
-                        &#10005;
-                    </span>
-                    <ul>
-                        <li>
-                            <img src="https://i.pinimg.com/564x/52/34/35/523435f76d9c3d1e1882a81ca8accc26.jpg" alt="user-pic" />
-                            <h4>Trần Thành An</h4>
-                            <div className="follow-handler">
-                                <FollowHandle />
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+            { followersPopup && (
+                <div className="popup-profil-container">
+                    <div className="modal">
+                        <h3>Subscribers</h3>
+                        <span 
+                            className="cross"
+                            onClick={() => setFollowersPopup(false)}
+                        >
+                            &#10005;
+                        </span>
+                        <ul>
+                            { usersData.map((user) => {
+                                for(let i = 0; i < userData.followers.length; i++) {
+                                    if (user._id === userData.followers[i]) {
+                                        return (
+                                            <li key={user._id}>
+                                                <img src={user.picture} alt="user-pic" />
+                                                <h4>{user.username}</h4>
+                                                <div className="follow-handler">
+                                                    <FollowHandle />
+                                                </div>
+                                            </li>
+                                        );
+                                    }
+                                }
+                                return null;
+                            }) }
+                        </ul>
+                    </div>
             </div>
-            <div className="popup-profil-container">
-                <div className="modal">
-                    <h3>Subscriptions</h3>
-                    <span 
-                        className="cross"
-                        onClick={() => setFollowersPopup(false)}
-                    >
-                        &#10005;
-                    </span>
-                    <ul>
-                        <li>
-                            <img src="https://i.pinimg.com/564x/52/34/35/523435f76d9c3d1e1882a81ca8accc26.jpg" alt="user-pic" />
-                            <h4>Trần Thành An</h4>
-                            <div className="follow-handler">
-                                <FollowHandle />
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div> */}
+            ) }
         </div>
     )
 }

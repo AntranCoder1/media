@@ -2,6 +2,8 @@ import {
     GET_USER,
     UPLOAD_PICTURE,
     UPDATE_BIO,
+    FOLLOW_USER,
+    UNFOLLOW_USER,
 } from './actions/User.actions';
 
 const initialState = {};
@@ -19,6 +21,18 @@ const UserRedux = (state = initialState, action) => {
             return {
                 ...state,
                 bio: action.payload,
+            }
+        case FOLLOW_USER:
+            return {
+                ...state,
+                following: [action.payload.idToFollow, ...state.following]
+            }
+        case UNFOLLOW_USER:
+            return {
+                ...state,
+                following: state.following.filter(
+                    (id) => id !== action.payload.idToUnFollow
+                ),
             }
         default:
             return state;

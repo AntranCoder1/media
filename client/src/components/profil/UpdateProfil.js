@@ -81,7 +81,7 @@ const UpdateProfil = () => {
                                                 <img src={user.picture} alt="user-pic" />
                                                 <h4>{user.username}</h4>
                                                 <div className="follow-handler">
-                                                    <FollowHandle />
+                                                    <FollowHandle idToFollow={user._id} type={'suggestion'} />
                                                 </div>
                                             </li>
                                         );
@@ -112,7 +112,7 @@ const UpdateProfil = () => {
                                                 <img src={user.picture} alt="user-pic" />
                                                 <h4>{user.username}</h4>
                                                 <div className="follow-handler">
-                                                    <FollowHandle />
+                                                    <FollowHandle idToFollow={user._id} type={'suggestion'} />
                                                 </div>
                                             </li>
                                         );

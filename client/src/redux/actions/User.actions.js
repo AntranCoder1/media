@@ -52,3 +52,31 @@ export const updateBio = (userId, bio) => {
             .catch((err) => console.log(err));
     }
 };
+
+export const followUser = (followerId, idToFollow) => {
+    return (dispatch) => {
+        return axios({
+            method: "patch",
+            url: "/users/follow/" + followerId,
+            data: { idToFollow },
+        })
+            .then((res) => {
+                dispatch({ type: FOLLOW_USER, payload: { idToFollow } });
+            })
+            .catch((err) => console.log(err));
+    }
+};
+
+export const unfollowUser = (followerId, idToUnFollow) => {
+    return (dispatch) => {
+        return axios({
+            method: "patch",
+            url: "/users/unfollow/" + followerId,
+            data: { idToUnFollow },
+        })
+            .then((res) => {
+                dispatch({ type: UNFOLLOW_USER, payload: { idToUnFollow } })
+            })
+            .catch((err) => console.log(err));
+    }
+};

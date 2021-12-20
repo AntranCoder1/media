@@ -1,7 +1,8 @@
 import { 
     GET_POSTS,
     ADD_POSTS,
-    LIKE_POSTS
+    LIKE_POSTS,
+    UNLIKE_POST,
 } from '../redux/actions/Post.actions';
 
 const initialState = {};
@@ -18,10 +19,10 @@ const PostRedux = (state = initialState, action) => {
                         likers: [action.payload.userId, ...post.likers],
                     };
                 }
-                return post
+                return post;
             });
         default:
-            return state
+            return state;
     }
 }
 

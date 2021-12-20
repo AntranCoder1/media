@@ -7,13 +7,18 @@ import { likePost } from '../../redux/actions/Post.actions';
 
 const LikeButton = ({ post }) => {
 
-    const uid = useContext(UidContext);
     const [liked, setLiked] = useState(false);
+    const uid = useContext(UidContext);
     const dispatch = useDispatch();
 
     const like = () => {
-        dispatch(likePost(post._id, uid));
+        dispatch(likePost(post._id, uid))
         setLiked(true);
+    };
+
+    const unlike = () => {
+        //dispatch(unLikePost(post._id, uid))
+        setLiked(false);
     };
 
     useEffect(() => {
@@ -23,25 +28,24 @@ const LikeButton = ({ post }) => {
 
     return (
         <div className="like-container">
-            { uid === null && (
-                <Popup 
-                    trigger={<img src="./img/icons/heart.svg" alt="like" />}
-                    position={["bottom center", "bottom right", "bottom left"]}
-                    closeOnDocumentClick
-                >
-                    <div>Log in to like a post!</div>
-                </Popup>
-            ) }
-
-            { uid && liked === false && (
-                <img src="/img/icons/heart.svg" onClick={like} alt="like" />
-            )}
-            { uid && liked && (
-                <img src="./img/icons/heart-filled.svg" alt="unlike" />
-            ) }
-            <span>{post.likers.length}</span>
+        {uid === null && (
+            <Popup
+                trigger={<img src="./img/icons/heart.svg" alt="like" />}
+                position={["bottom center", "bottom right", "bottom left"]}
+                closeOnDocumentClick
+            >
+            <div>Log in to like a post!</div>
+            </Popup>
+        )}
+        {uid && liked === false && (
+            <img src="./img/icons/heart.svg" onClick={like} alt="like" />
+        )}
+        {uid && liked && (
+            <img src="./img/icons/heart-filled.svg" onClick={unlike} alt="unlike" />
+        )}
+        <span>{post.likers.length}</span>
         </div>
-    )
+    );
 }
 
 export default LikeButton

@@ -4,6 +4,7 @@ export const GET_POSTS = "GET_POSTS";
 export const GET_ALL_POSTS = "GET_ALL_POSTS";
 export const ADD_POSTS = "ADD_POSTS";
 export const LIKE_POSTS = "LIKE_POSTS";
+export const UNLIKE_POSTS = "UNLIKE_POST";
 export const UPDATE_POSTS = "UPDATE_POSTS";
 export const DELETE_POSTS = "DELETE_POSTS";
 
@@ -39,10 +40,14 @@ export const addPost = (data) => {
 
 export const likePost = (postId, userId) => {
     return (dispatch) => {
-        return axios.patch("/posts/like-post/" + postId)
+        return axios({
+            method: "patch",
+            url: "/posts/like-post/" + postId,
+            data: { id: userId },
+        })
             .then((res) => {
                 dispatch({ type: LIKE_POSTS, payload: { postId, userId } });
             })
             .catch((err) => console.log(err));
-    }
+    };
 };

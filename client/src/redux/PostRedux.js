@@ -2,7 +2,7 @@ import {
     GET_POSTS,
     ADD_POSTS,
     LIKE_POSTS,
-    UNLIKE_POST,
+    UNLIKE_POSTS,
 } from '../redux/actions/Post.actions';
 
 const initialState = {};
@@ -21,6 +21,16 @@ const PostRedux = (state = initialState, action) => {
                 }
                 return post;
             });
+        case UNLIKE_POSTS:
+            return state.map((post) => {
+                if (post._id === action.payload.postId) {
+                    return {
+                        ...post,
+                        likers: post.likers.filter((id) => id !== action.payload.userId),
+                    };
+                }
+                return post;
+            })
         default:
             return state;
     }

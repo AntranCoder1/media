@@ -51,3 +51,17 @@ export const likePost = (postId, userId) => {
             .catch((err) => console.log(err));
     };
 };
+
+export const unLikePost = (postId, userId) => {
+    return (dispatch) => {
+        return axios({
+            method: "patch",
+            url: "/posts/unlike-post/" + postId,
+            data: { id: userId },
+        })
+            .then((res) => {
+                dispatch({ type: UNLIKE_POSTS, payload: { postId, userId } });
+            })
+            .catch((err) => console.log(err));
+    };
+};

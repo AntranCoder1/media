@@ -36,3 +36,13 @@ export const addPost = (data) => {
             .catch((err) => console.log(err));
     }
 };
+
+export const likePost = (postId, userId) => {
+    return (dispatch) => {
+        return axios.patch("/posts/like-post/" + postId)
+            .then((res) => {
+                dispatch({ type: LIKE_POSTS, payload: { postId, userId } });
+            })
+            .catch((err) => console.log(err));
+    }
+};

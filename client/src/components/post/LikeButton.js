@@ -3,12 +3,18 @@ import { UidContext } from '../../components/AppContext';
 import Popup from 'reactjs-popup';
 import "reactjs-popup/dist/index.css";
 import { useDispatch } from 'react-redux';
+import { likePost } from '../../redux/actions/Post.actions';
 
 const LikeButton = ({ post }) => {
 
     const uid = useContext(UidContext);
     const [liked, setLiked] = useState(false);
     const dispatch = useDispatch();
+
+    const like = () => {
+        dispatch(likePost(post._id, uid));
+        setLiked(true);
+    };
 
     useEffect(() => {
         if (post.likers.includes(uid)) setLiked(true);
@@ -28,7 +34,7 @@ const LikeButton = ({ post }) => {
             ) }
 
             { uid && liked === false && (
-                <img src="/img/icons/heart.svg" alt="like" />
+                <img src="/img/icons/heart.svg" onClick={like} alt="like" />
             )}
             { uid && liked && (
                 <img src="./img/icons/heart-filled.svg" alt="unlike" />

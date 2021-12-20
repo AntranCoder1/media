@@ -26,3 +26,13 @@ export const getPosts = (num) => {
             .catch((err) => console.log(err));
     }
 };
+
+export const addPost = (data) => {
+    return (dispatch) => {
+        return axios.post("/posts/", data)
+            .then((res) => {
+                dispatch({ type: ADD_POSTS, payload: res.data })
+            })
+            .catch((err) => console.log(err));
+    }
+};

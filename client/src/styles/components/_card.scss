@@ -7,8 +7,8 @@
     border-radius: 20px;
     margin: 8px auto;
     position: relative;
-    height: 100px;
-
+    min-height: 100px;
+  
     @media screen and(max-width: 590px) {
         grid-template-columns: 1fr;
     }
@@ -16,7 +16,7 @@
     @media screen and(max-width: 440px) {
         padding-top: 26px;
     }
-
+  
     .fa-spinner {
         position: absolute;
         top: 40%;
@@ -24,7 +24,7 @@
         font-size: 1.5rem;
         color: $color-1;
     }
-
+  
     .card-left {
         img {
             height: 52px;
@@ -32,7 +32,7 @@
             border-radius: 20px;
             box-shadow: 1px 1px 3px rgba(51, 51, 51, 0.192);
             object-fit: cover;
-    
+  
             @media screen and(max-width: 590px) {
                 height: 40px;
                 width: 40px;
@@ -40,12 +40,13 @@
                 border-radius: 14px;
             }
         }
+
         @media screen and(max-width: 590px) {
             position: absolute;
             transform: translate(17px, 18px);
         }
     }
-    
+  
     .card-right {
         @media screen and(max-width: 590px) {
             margin-left: 18px;
@@ -56,18 +57,18 @@
             justify-content: space-between;
             margin: 2px 0 4px;
             min-height: 35px;
-
+    
             @media screen and(max-width: 590px) {
                 margin: 12px 0 14px;
             }
-        
+    
             @media screen and(max-width: 440px) {
                 flex-direction: column;
             }
-
-            .name {
+    
+            .username {
                 display: flex;
-
+        
                 @media screen and(max-width: 590px) {
                     margin-left: 52px;
                 }
@@ -75,15 +76,15 @@
                 @media screen and(max-width: 440px) {
                     transform: translateY(-18px);
                 }
-
+        
                 span {
-                    transform: translate(0, -5px);
-
+                    transform: translate(0px, -5px);
+            
                     @media screen and(max-width: 440px) {
                         margin: 0px 0 -10px;
                         padding: 0;
                     }
-
+            
                     img {
                         padding: 5px;
                         cursor: pointer;
@@ -96,7 +97,7 @@
                             transform: scale(1.2) translate(0px, 0px);
                         }
                     }
-
+        
                     .fas {
                         color: $color-1;
                     }
@@ -106,7 +107,7 @@
                     }
                 }
             }
-
+    
             span {
                 font-style: italic;
                 font-family: $font-1;
@@ -120,7 +121,7 @@
         p {
             margin: 3px 0 9px;
             font-size: 1.1rem;
-
+    
             @media screen and(max-width: 440px) {
                 margin-top: -18px;
             }
@@ -139,7 +140,7 @@
                     background: $color-2;
                     width: 240px;
                     transform: translateY(-3px);
-
+        
                     &:hover {
                         background: $color-1;
                         width: 250px;
@@ -166,7 +167,7 @@
         .button-container {
             justify-content: flex-end;
             display: flex;
-
+    
             div {
                 padding: 5px 9px;
                 margin-left: 5px;
@@ -174,11 +175,11 @@
                 border-radius: 50px;
                 transition: 0.1s;
                 cursor: pointer;
-
+    
                 &:hover {
                     transform: scale(1.07);
                 }
-          
+        
                 img {
                     height: 16px;
                     width: 16px;
@@ -193,13 +194,13 @@
             justify-content: center;
             justify-content: space-between;
             padding: 12px 0 4px;
-
+    
             img {
                 height: 22px;
                 width: 22px;
                 cursor: pointer;
                 transition: 0.2s;
-
+        
                 &:hover {
                     transform: scale(1.2);
                 }
@@ -209,7 +210,7 @@
             .like-container {
                 display: flex;
                 align-items: center;
-
+        
                 span {
                     font-size: 1.02rem;
                     position: absolute;
@@ -217,7 +218,7 @@
                 }
             }
         }
-
+        
         .comment-container.client {
             background: $color-4;
             border: none;
@@ -231,14 +232,14 @@
             padding: 15px;
             margin: 5px 0;
             border-radius: 20px 20px 20px 6px;
-
+    
             img {
                 height: 40px;
                 width: 40px;
                 border-radius: 14px;
                 box-shadow: 1px 1px 3px rgba(51, 51, 51, 0.192);
                 object-fit: cover;
-
+    
                 @media screen and(max-width: 440px) {
                     height: 37px;
                     width: 37px;
@@ -248,22 +249,22 @@
             .comment-header {
                 display: flex;
                 justify-content: space-between;
-
+        
                 @media screen and(max-width: 440px) {
                     flex-direction: column;
                 }
-
-                .name {
+    
+                .username {
                     display: flex;
-
+        
                     h3 {
-                        font-weight: $font-1;
+                        font-family: $font-1;
                     }
 
                     span {
                         transform: translate(6px, 4px);
                         cursor: pointer;
-
+            
                         img {
                             box-shadow: none;
                             height: 15px;
@@ -271,7 +272,7 @@
                         }
                     }
                 }
-
+    
                 span {
                     font-size: 0.9rem;
                     font-style: italic;
@@ -294,12 +295,12 @@
                     box-shadow: none;
                     height: 20px;
                     width: 20px;
-
+        
                     &:hover {
                         transform: scale(1.1);
                     }
                 }
-
+    
                 .edit-comment-form {
                     margin-top: 14px;
 
@@ -312,7 +313,7 @@
                         transition: 0.2s;
                         display: inline-block;
                         font-family: $font-3;
-            
+        
                         &:hover {
                             transform: scale(1.05);
                         }
@@ -328,10 +329,10 @@
                     }
 
                     .btn {
-                        display: flex;
-                        align-items: center;
-                        float: right;
-
+                    display: flex;
+                    align-items: center;
+                    float: right;
+        
                         span {
                             background: $white;
                             padding: 10px 5px;
@@ -339,11 +340,11 @@
                             margin-right: 6px;
                             transition: 0.2s;
                             cursor: pointer;
-
+            
                             &:hover {
                                 background: $color-2;
                             }
-                
+            
                             img {
                                 transform: translate(-5px, 0);
                             }
@@ -353,7 +354,7 @@
                             background: $color-2;
                             width: inherit;
                             transition: 0.2s;
-
+            
                             &:hover {
                                 width: inherit;
                                 background: $color-1;
@@ -366,7 +367,7 @@
 
         .comment-form {
             margin-top: 6px;
-
+    
             input[type="text"] {
                 width: 100%;
                 background: $color-4;
@@ -387,25 +388,24 @@
                 border-radius: 20px 6px 20px 20px;
                 transition: 0.2s;
                 float: right;
-        
+    
                 &:hover {
                     background: $color-1;
                     letter-spacing: 2px;
                     width: 130px;
                 }
             }
-
             button {
                 float: right;
                 background: $color-1;
                 transition: 0.2s;
-
+        
                 &:hover {
                     background: $color-2;
                 }
             }
         }
-
+        
         .like-container {
             span {
                 font-size: 1.02rem;
@@ -413,7 +413,7 @@
                 transform: translate(8px, -1px);
             }
         }
-        
+
         .fa-share-alt {
             transform: translate(0, 2px);
         }
@@ -427,12 +427,12 @@
 
         .button-container {
             text-align: right;
-
+    
             button {
                 margin: 0;
                 margin-left: 5px;
                 width: 150px;
-
+        
                 &:nth-child(1) {
                     background: $color-1;
                 }
@@ -440,3 +440,4 @@
         }
     }
 }
+  

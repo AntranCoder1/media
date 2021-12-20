@@ -8,6 +8,7 @@ import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { getUsers } from './redux/actions/Users.action';
+import { getPosts } from './redux/actions/Post.actions';
 
 const store = createStore(
   rootRedux,
@@ -15,6 +16,7 @@ const store = createStore(
 );
 
 store.dispatch(getUsers());
+store.dispatch(getPosts());
 
 ReactDOM.render(
   <Provider store={store}>

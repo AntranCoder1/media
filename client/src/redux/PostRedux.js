@@ -1,9 +1,11 @@
+import axios from 'axios';
 import { 
     GET_POSTS,
     ADD_POSTS,
     LIKE_POSTS,
     UNLIKE_POSTS,
     UPDATE_POSTS,
+    DELETE_POSTS,
 } from '../redux/actions/Post.actions';
 
 const initialState = {};
@@ -41,6 +43,8 @@ const PostRedux = (state = initialState, action) => {
                     };
                 } else return post;
             });
+        case DELETE_POSTS:
+            return state.filter((post) => post._id !== action.payload.postId);
         default:
             return state;
     }

@@ -70,7 +70,8 @@ export const updatePost = (postId, message) => {
     return (dispatch) => {
         return axios({
             method: "put",
-            url: `/posts/${postId}`,
+            // url: `/posts/${postId}`,
+            url: "/posts/" + postId,
             data: { message },
         })
             .then((res) => {
@@ -78,4 +79,14 @@ export const updatePost = (postId, message) => {
             })
             .catch((err) =>  console.log(err))
     };  
+};
+
+export const deletePost = (postId) => {
+    return (dispatch) => {
+        return axios.delete("/posts/" + postId)
+            .then((res) => {
+                dispatch({ type: DELETE_POSTS, payload: { postId } })
+            })
+            .catch((err) => console.log(err));
+    };
 };

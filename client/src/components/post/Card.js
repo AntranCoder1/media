@@ -74,7 +74,7 @@ const Card = ({ post }) => {
                                 />
                                 <div className="button-container">
                                     <button className="btn" onClick={updateItem}>
-                                        Valider modification
+                                        Update
                                     </button>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@ const Card = ({ post }) => {
                                 <div onClick={() => setIsUpdate(!isUpdated)}>
                                     <img src="./img/icons/edit.svg" alt="edit" />
                                 </div>
-                                {/* <DeleteCard id={post._id} /> */}
+                                <DeleteCard id={post._id} />
                             </div>
                         )}
                         <div className="card-footer">

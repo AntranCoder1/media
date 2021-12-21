@@ -6,7 +6,7 @@ import {
     UNLIKE_POSTS,
     UPDATE_POSTS,
     DELETE_POSTS,
-    ADD_COMMENT,
+    UPDATE_COMMENT,
 } from '../redux/actions/Post.actions';
 
 const initialState = {};
@@ -46,17 +46,24 @@ const PostRedux = (state = initialState, action) => {
             });
         case DELETE_POSTS:
             return state.filter((post) => post._id !== action.payload.postId);
-        // case ADD_COMMENT:
-        //     return state.map((post) => {
-        //         if (post._id === action.payload.postId) {
-        //             return {
-        //                 ...post,
-        //                 commenterId: action.payload.commenterId,
-        //                 commenterUsername: action.payload.commenterUsername,
-        //                 text: action.payload.text,
-        //             }
-        //         }
-        //     });
+        case UPDATE_COMMENT:
+            return state.map((post) => {
+                if (post._id === action.payload.postId) {
+                    return {
+                        ...post,
+                        comments: post.comments.map((comment) => {
+                            if (comment._id === action.payload.commentId) {
+                                return {
+                                    ...comment,
+                                    text: action.payload.text,
+                                };
+                            } else {
+                                return comment;
+                            }
+                        }),
+                    };
+                } else return post;
+            });
         default:
             return state;
     }

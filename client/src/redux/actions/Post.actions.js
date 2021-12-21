@@ -104,3 +104,17 @@ export const addComment = (postId, commenterId, commenterUsername, text) => {
             .catch((err) => console.log(err))
     };
 };
+
+export const updateComment = (postId, commentId, text) => {
+    return (dispatch) => {
+        return axios({
+            method: "patch",
+            url: "/posts/edit-comment-post/" + postId,
+            data: { commentId, text },
+        })
+            .then((res) => {
+                dispatch({ type: UPDATE_COMMENT, payload: { postId, commentId, text } });
+            })
+            .catch((err) => console.log(err));
+    };
+};

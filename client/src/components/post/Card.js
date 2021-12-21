@@ -5,16 +5,26 @@ import CardComment from './CardComment';
 import { dateParser, isEmpty } from '../Utils';
 import { useDispatch, useSelector } from 'react-redux';
 import FollowHandler from '../profil/FollowHandle';
+import { updatePost } from '../../redux/actions/Post.actions';
 
 const Card = ({ post }) => {
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isUpdated, setIsUpdate] = useState(false);
+    const [textUpdate, setTextUpdate] = useState(null);
     const usersData = useSelector(state => state.UsersRedux);
     const userData = useSelector(state => state.UserRedux);
     const dispatch = useDispatch();
 
+    const updateItem = () => {
+        if (textUpdate) {
+            dispatch(updatePost(post._id, textUpdate));
+        }
+        setIsUpdate(false);
+    };
+
     useEffect(() => {
-        isEmpty(usersData[0]) && setIsLoading(false);
+        !isEmpty(usersData[0]) && setIsLoading(false);
     }, [usersData]);
 
     return (
@@ -55,20 +65,20 @@ const Card = ({ post }) => {
                             </div>
                             <span>{dateParser(post.createdAt)}</span>
                         </div>
-                        <p>{post.message}</p>
-                        {/* {isUpdated && (
+                        { isUpdated === false && <p>{post.message}</p> }
+                        { isUpdated && (
                             <div className="update-post">
                                 <textarea
                                     defaultValue={post.message}
-                                    // onChange={(e) => setTextUpdate(e.target.value)}
+                                    onChange={(e) => setTextUpdate(e.target.value)}
                                 />
                                 <div className="button-container">
-                                    <button className="btn">
+                                    <button className="btn" onClick={updateItem}>
                                         Valider modification
                                     </button>
                                 </div>
                             </div>
-                        )} */}
+                        ) }
                         {post.picture && (
                             <img src={post.picture} alt="card-pic" className="card-pic" />
                         )}
@@ -85,7 +95,7 @@ const Card = ({ post }) => {
                         )}
                         {userData._id === post.posterId && (
                             <div className="button-container">
-                                <div>
+                                <div onClick={() => setIsUpdate(!isUpdated)}>
                                     <img src="./img/icons/edit.svg" alt="edit" />
                                 </div>
                                 {/* <DeleteCard id={post._id} /> */}

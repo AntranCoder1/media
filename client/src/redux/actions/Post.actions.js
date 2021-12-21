@@ -65,3 +65,17 @@ export const unLikePost = (postId, userId) => {
             .catch((err) => console.log(err));
     };
 };
+
+export const updatePost = (postId, message) => {
+    return (dispatch) => {
+        return axios({
+            method: "put",
+            url: `/posts/${postId}`,
+            data: { message },
+        })
+            .then((res) => {
+                dispatch({ type: UPDATE_POSTS, payload: { message, postId } });
+            })
+            .catch((err) =>  console.log(err))
+    };  
+};

@@ -3,6 +3,7 @@ import {
     ADD_POSTS,
     LIKE_POSTS,
     UNLIKE_POSTS,
+    UPDATE_POSTS,
 } from '../redux/actions/Post.actions';
 
 const initialState = {};
@@ -30,7 +31,16 @@ const PostRedux = (state = initialState, action) => {
                     };
                 }
                 return post;
-            })
+            });
+        case UPDATE_POSTS:
+            return state.map((post) => {
+                if (post._id === action.payload.postId) {
+                    return {
+                        ...post,
+                        message: action.payload.message,
+                    };
+                } else return post;
+            });
         default:
             return state;
     }

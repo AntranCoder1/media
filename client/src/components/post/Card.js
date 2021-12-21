@@ -4,6 +4,7 @@ import DeleteCard from './DeleteCard';
 import CardComment from './CardComment';
 import { dateParser, isEmpty } from '../Utils';
 import { useDispatch, useSelector } from 'react-redux';
+import FollowHandler from '../profil/FollowHandle';
 
 const Card = ({ post }) => {
 
@@ -48,9 +49,9 @@ const Card = ({ post }) => {
                                     })
                                     .join("")}
                                 </h3>
-                                {/* {post.posterId !== userData._id && (
+                                { post.posterId !== userData._id && (
                                     <FollowHandler idToFollow={post.posterId} type={"card"} />
-                                )} */}
+                                ) }
                             </div>
                             <span>{dateParser(post.createdAt)}</span>
                         </div>

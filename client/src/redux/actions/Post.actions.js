@@ -90,3 +90,17 @@ export const deletePost = (postId) => {
             .catch((err) => console.log(err));
     };
 };
+
+export const addComment = (postId, commenterId, commenterUsername, text) => {
+    return (dispatch) => {
+        return axios({
+            method: "patch",
+            url: "/posts/comment-post/" + postId,
+            data: { commenterId, commenterUsername, text },
+        })
+            .then((res) => {
+                dispatch({ type: ADD_COMMENT, payload: { postId } });
+            })
+            .catch((err) => console.log(err))
+    };
+};

@@ -12,6 +12,7 @@ const Card = ({ post }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isUpdated, setIsUpdate] = useState(false);
     const [textUpdate, setTextUpdate] = useState(null);
+    const [showComment, setShowComment] = useState(false);
     const usersData = useSelector(state => state.UsersRedux);
     const userData = useSelector(state => state.UserRedux);
     const dispatch = useDispatch();
@@ -104,6 +105,7 @@ const Card = ({ post }) => {
                         <div className="card-footer">
                             <div className="comment-icon">
                                 <img
+                                    onClick={() => setShowComment(!showComment)}
                                     src="./img/icons/message1.svg"
                                     alt="comment"
                                 />
@@ -112,6 +114,7 @@ const Card = ({ post }) => {
                             <LikeButton post={post} />
                             <img src="./img/icons/share.svg" alt="share" />
                         </div>
+                        { showComment && <CardComment post={post} /> }
                     </div>
                 </>
             ) }

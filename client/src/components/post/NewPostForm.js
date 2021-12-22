@@ -19,6 +19,12 @@ const NewPostForm = () => {
         e.preventDefault();
     }
 
+    const handlePicture = (e) => {
+        setPostPicture(URL.createObjectURL(e.target.files[0]));
+        setFile(e.target.files[0]);
+        setVideo('');
+    }
+
     const cancelPost = () => {
         setMessage("");
         setPostPicture("");
@@ -116,6 +122,7 @@ const NewPostForm = () => {
                                             id="file-upload"
                                             name="file"
                                             accept=".jpg, .jpeg, .png"
+                                            onChange={(e) => handlePicture(e)}
                                         />
                                     </>
                                 )}

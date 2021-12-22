@@ -7,6 +7,7 @@ import {
     UPDATE_POSTS,
     DELETE_POSTS,
     UPDATE_COMMENT,
+    DELETE_COMMENT,
 } from '../redux/actions/Post.actions';
 
 const initialState = {};
@@ -61,6 +62,17 @@ const PostRedux = (state = initialState, action) => {
                                 return comment;
                             }
                         }),
+                    };
+                } else return post;
+            });
+        case DELETE_COMMENT:
+            return state.map((post) => {
+                if (post._id === action.payload.postId) {
+                    return {
+                        ...post,
+                        comments: post.comments.filter(
+                            (comment) => comment._id !== action.payload.commentId
+                        ),
                     };
                 } else return post;
             });

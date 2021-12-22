@@ -118,3 +118,17 @@ export const updateComment = (postId, commentId, text) => {
             .catch((err) => console.log(err));
     };
 };
+
+export const deleteComment = (postId, commentId) => {
+    return (dispatch) => {
+        return axios({
+            method: "patch",
+            url: "/posts/delete-comment-post/" + postId,
+            data: { commentId },
+        })
+            .then((res) => {
+                dispatch({ type: DELETE_COMMENT, payload: { postId, commentId } })
+            })
+            .catch((err) => console.log(err));
+    };
+};

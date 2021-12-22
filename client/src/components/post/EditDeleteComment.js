@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'; 
 import { UidContext } from '../AppContext';
-import { updateComment } from '../../redux/actions/Post.actions';
+import { updateComment, deleteComment } from '../../redux/actions/Post.actions';
 
 const EditDeleteComment = ({ comment, postId }) => {
 
@@ -21,6 +21,10 @@ const EditDeleteComment = ({ comment, postId }) => {
         }
     }
 
+    const handleDelete = () => {
+        dispatch(deleteComment(postId, comment._id));
+    }
+
     useEffect(() => {
         const checkAuthor = () => {
             if (uid === comment.commenterId) {
@@ -36,7 +40,7 @@ const EditDeleteComment = ({ comment, postId }) => {
             <span onClick={() => setEdit(!edit)}>
                 <img src="./img/icons/edit.svg" alt="edit-comment" />
             </span>
-            { edit && (
+            { isAuthor && edit && (
                 <form className="edit-comment-form" onSubmit={handleUpdate}>
                     <label htmlFor='text'>Editer</label>
                     <br />
@@ -48,10 +52,16 @@ const EditDeleteComment = ({ comment, postId }) => {
                     />
                     <br />
                     <div className="btn">
-                        <span>
+                        <span
+                            onClick={() => {
+                                if (window.confirm("Do you want to delete this comment ?")) {
+                                    handleDelete();
+                                }
+                            }}
+                        >
                             <img src="./img/icons/trash.svg" alt="delete" />
                         </span>
-                        <input type="submit" value="Update" />
+                        <input type="submit" value="Valider modification" />
                     </div>
                 </form>
             )}

@@ -32,10 +32,13 @@ export const addPost = (data) => {
     return (dispatch) => {
         return axios.post("/posts/", data)
             .then((res) => {
-                dispatch({ type: ADD_POSTS, payload: res.data })
-            })
-            .catch((err) => console.log(err));
-    }
+                if (res.data.errors) {
+                    dispatch({ type: GET_POSTS_ERRORS, payload: res.data.errors });
+                } else {
+                    dispatch({ type: GET_POSTS_ERRORS, payload: "" });
+                }
+            });
+    };
 };
 
 export const likePost = (postId, userId) => {

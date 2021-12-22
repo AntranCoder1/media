@@ -47,7 +47,7 @@
     .post-form {
         position: relative;
         margin: 0 auto 0;
-    
+  
         textarea {
             height: 62px;
             width: 100%;
@@ -55,6 +55,7 @@
             padding: 12px 15px;
             border-radius: 20px 20px 6px 20px;
         }
+
         .card-container {
             background: $white;
             border-radius: 20px 20px 6px 20px;
@@ -83,7 +84,7 @@
                         margin: 0;
                     }
 
-                    .name {
+                    .username {
                         @media screen and(max-width: 440px) {
                             transform: translateY(-8px);
                         }
@@ -120,14 +121,13 @@
                         border-radius: 6px;
                         margin-top: 12px;
                     }
-                    
+
                     @media screen and(max-width: 632px) {
                         margin-top: 20px;
                     }
                 }
             }
         }
-
         .footer-form {
             display: flex;
             justify-content: space-between;
@@ -154,7 +154,7 @@
                     transition: 0.2s;
         
                     &:hover {
-                    background: $color-3;
+                        background: $color-3;
                     }
                 }
     
@@ -167,7 +167,7 @@
                     cursor: pointer;
         
                     &::-webkit-file-upload-button {
-                    cursor: pointer;
+                        cursor: pointer;
                     }
                 }
             }
@@ -185,8 +185,8 @@
                     background: $white;
         
                     &:hover {
-                    color: $color-4;
-                    background: $color-3;
+                        color: $color-4;
+                        background: $color-3;
                     }
                 }
 
@@ -205,4 +205,5 @@
             }
         }
     }
-}  
+}
+  

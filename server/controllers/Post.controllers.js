@@ -73,8 +73,8 @@ module.exports.updatePost = async (req, res) => {
         { $set: updatedRecord },
         { new: true },
         (err, docs) => {
-        if (!err) res.send(docs);
-        else console.log("Update error : " + err);
+            if (!err) res.send(docs);
+            else console.log("Update error : " + err);
         }
     );
 };
@@ -122,7 +122,7 @@ module.exports.likePost = async (req, res) => {
 
 module.exports.unlikePost = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
+        return res.status(400).send("ID unknown : " + req.params.id);
 
     try {
         await Post.findByIdAndUpdate(
